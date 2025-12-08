@@ -39,23 +39,23 @@ std::string ClapTrap::getName(void)
 
 ClapTrap::ClapTrap(std::string name): _name(name), hitPoints(10), energyPoints(10), attackDamage(0)
 {
-    std::cout << "The constructor has been called." << std::endl;
+    std::cout << "The ClapTrap constructor has been called." << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "The destructor has been called." << std::endl;
+    std::cout << "The ClapTrap destructor has been called." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other): _name(other._name), hitPoints(other.hitPoints), energyPoints(other.energyPoints), attackDamage(other.attackDamage)
 {
-    std::cout << "The copy constructor has been called." << std::endl;
+    std::cout << "The ClapTrap copy constructor has been called." << std::endl;
 
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap& other)
 {
-    std::cout << "The copy assignment operator has been called." << std::endl;
+    std::cout << "The ClapTrap copy assignment operator has been called." << std::endl;
     if (this == &other)
         return (*this);
     this->_name = other._name;

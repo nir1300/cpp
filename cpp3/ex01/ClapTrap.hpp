@@ -6,7 +6,7 @@
 #include <iostream>
 
 class ClapTrap {
-    private:
+    protected: // changed to protected so derived class has access to these vars
         std::string _name;
         int hitPoints;
         int energyPoints;
