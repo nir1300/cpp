@@ -1,0 +1,7 @@
+to-do:
+2/12 & 3/12 - cpp2
+4-6/12 - evaluate cpp0, 1 & 2, start 3
+7/12 - finish and evaluate cpp3
+8 & 9/12 - do and evaluate cpp4
+
+be done with cpp8 by christmas

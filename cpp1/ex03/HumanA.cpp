@@ -1,6 +1,6 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string inputName, Weapon& inputWeapon) : name(inputName), weapon(inputWeapon) {}
+HumanA::HumanA(std::string inputName, Weapon& inputWeapon) : name(inputName), weapon(inputWeapon) {} // list initialization
 
 const std::string   HumanA::getName(void)
 {
