@@ -6,6 +6,7 @@
 
 int main()
 {
+    std::cout << "Test animals: \n" << std::endl;
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
@@ -15,6 +16,19 @@ int main()
     j->makeSound();
     meta->makeSound();
 
-    // more tests here
+    std::cout << "\n\nTest wrong animals: \n" << std::endl;
+    const WrongAnimal* a = new WrongAnimal();
+    const WrongAnimal* c = new WrongCat();
+    std::cout << a->getType() << " " << std::endl;
+    std::cout << c->getType() << " " << std::endl;
+    a->makeSound(); // will output the wrong animal sound!
+    c->makeSound(); // same
+
+    delete meta;
+    delete i;
+    delete j;
+    delete a;
+    delete c;
+
     return 0;
 }

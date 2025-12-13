@@ -9,10 +9,11 @@ class Animal {
     protected: 
         std::string type;
     public:
-        void makeSound();
+        const std::string getType() const;
+        virtual void makeSound() const;
         // Orthodox Canonical Form
-        Animal(std::string InputType);
-        ~Animal();
+        Animal();
+        virtual ~Animal();
         Animal(const Animal &other);
         Animal &operator=(const Animal& other);
 };
