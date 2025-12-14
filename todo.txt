@@ -1,7 +1,18 @@
-to-do:
-2/12 & 3/12 - cpp2
-4-6/12 - evaluate cpp0, 1 & 2, start 3
-7/12 - finish and evaluate cpp3
-8 & 9/12 - do and evaluate cpp4
+to-do: 13/12
+proofread cpp0, 1
+finish cpp2
 
-be done with cpp8 by christmas
+to-do: 14/12
+evaluate cpp0 & 1
+proofread cpp2 & 3
+
+to-do: 15/12
+evaluate cpp2 & 3
+finish cpp4
+
+to-do: 16/12
+evaluate cpp4
+do cpp5
+
+cancel freeze?
+
