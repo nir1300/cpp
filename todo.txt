@@ -1,9 +1,10 @@
-to-do: 13/12
+to-do: 14/12
 proofread cpp0, 1
 finish cpp2
+evaluate cpp0
 
 to-do: 14/12
-evaluate cpp0 & 1
+evaluate cpp1
 proofread cpp2 & 3
 
 to-do: 15/12
@@ -16,3 +17,20 @@ do cpp5
 
 cancel freeze?
 
+
+CPP NOTES
+
+1. return value - value vs reference
+Arithmetic operators that create a new value (+, -, *, /) should always return by value. -> pay attention to constructor (create new Object if rescaling can be issue)
+Operators that modify in-place (+=, -=, etc.) can return by reference.
+
+2. when is copy constructor used, when default?
+
+
+3. when to use static functions?
+
+
+4. when to pass parameters by value vs reference?
+
+
+5. when to return a const?

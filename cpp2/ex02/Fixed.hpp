@@ -46,7 +46,8 @@ class Fixed {
         // in-/decrement operators
         Fixed operator++();
         const Fixed operator++(int);
-
+        Fixed operator--();
+        const Fixed operator--(int);
         
         // min/max overload
         // static because it belongs to class not specific object
