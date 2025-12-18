@@ -2,119 +2,145 @@
 
 PhoneBook::PhoneBook(void)
 {
-    this->next_index = 0;
-    this->nb_contacts = 0;
+    this->nextIndex = 0;
+    this->nbContacts = 0;
 }
 
-void PhoneBook::search_contacts(void) const
+void PhoneBook::searchContacts(void) const
 {
     std::string input;
     int index = -1;
 
-    if (this->nb_contacts == 0)
+    if (this->nbContacts == 0)
         return ;
-    std::cout << "Enter contact index: ";
-    std::getline(std::cin, input);
-    if (input.size() == 1 && std::isdigit((int)input[0]))
-        index = input[0] - '0';
-    else
-        std::cout << "Invalid input (must be a single number)" << std::endl;
-    if (index >= this->nb_contacts || index > 7 || index < 0)
+    while (1 && std::cin)
     {
-        std::cout << "Index out of range (accepted range: 0-" << this->nb_contacts - 1 << ")" << std::endl;
-        return ;
+        std::cout << "Enter contact index: ";
+        std::getline(std::cin, input);
+        if (input.empty())
+            continue;
+        if (input.size() == 1 && std::isdigit((int)input[0]))
+        {
+            index = input[0] - '0';
+            if (index >= this->nbContacts || index > 7 || index < 0)
+                std::cout << "Index out of range (accepted range: 0-" << this->nbContacts - 1 << "). Try again." << std::endl;
+            else
+            {
+                cont[index].displayContact();
+                break;
+            }
+        }
+        else
+            std::cout << "Invalid input (must be a single number, accepted range: 0-" << this->nbContacts - 1 << "). Try again." << std::endl;
     }
-    else
-        cont[index].display_contact();
+    // cont[index].displayContact();
 }
 
-void PhoneBook::display_all_contacts(void) const
+void PhoneBook::displayAllContacts(void) const
 {
-    if (this->nb_contacts == 0)
+    if (this->nbContacts == 0)
     {
         std::cout << "No contacts in phonebook" << std::endl;
         return ;
     }
-    for (int i = 0; i < this->nb_contacts; i++)
+
+    for (int i = 0; i < this->nbContacts; i++)
     {
-        cont[i].format_and_print(cont[i].get_firstname());
+        std::cout << std::setw(10) << i;
         std::cout << "|";
-        cont[i].format_and_print(cont[i].get_lastname());
+        cont[i].formatAndPrint(cont[i].getFirstName());
         std::cout << "|";
-        cont[i].format_and_print(cont[i].get_nickname());
+        cont[i].formatAndPrint(cont[i].getLastName());
+        std::cout << "|";
+        cont[i].formatAndPrint(cont[i].getNickName());
         std::cout << std::endl;
     }
 }
 
 
 
-std::string    PhoneBook::enter_first(void)
+std::string    PhoneBook::enterFirst(void)
 {
     std::string first;
     while (1 && std::cin)
     {
         std::cout << "Enter first name: ";
         std::getline(std::cin, first);
+        if (first.empty())
+            continue;
         if (!first.empty() && str_isalpha(first))
             break;
+        std::cout << "Field cannot be empty. Only letters a-z/A-Z are accepted. Try again." << std::endl;
     }
     return (first);
 }
 
-std::string    PhoneBook::enter_last(void)
+std::string    PhoneBook::enterLast(void)
 {
     std::string last;
     while (1 && std::cin)
     {
         std::cout << "Enter last name: ";
         std::getline(std::cin, last);
+        if (last.empty())
+            continue;
         if (!last.empty() && str_isalpha(last))
             break;
+        std::cout << "Field cannot be empty. Only letters a-z/A-Z are accepted. Try again." << std::endl;
     }
     return (last);
 }
 
-std::string    PhoneBook::enter_nick(void)
+std::string    PhoneBook::enterNick(void)
 {
     std::string nick;
     while (1 && std::cin)
     {
         std::cout << "Enter nickname: ";
         std::getline(std::cin, nick);
+        if (nick.empty())
+            continue;
         if (!nick.empty() && str_isalpha(nick))
             break;
+        std::cout << "Field cannot be empty. Only letters a-z/A-Z are accepted. Try again." << std::endl;
     }
     return (nick);
 }
 
-std::string    PhoneBook::enter_number(void)
+std::string    PhoneBook::enterNumber(void)
 {
     std::string number;
     while (1 && std::cin)
     {
         std::cout << "Enter number: ";
         std::getline(std::cin, number);
+        if (number.empty())
+            continue;
         if (!number.empty() && str_isdigit(number))
             break;
+        std::cout << "Field cannot be empty. Only numbers 0-9 are accepted. Try again." << std::endl;
     }
     return (number);
 }
 
-std::string    PhoneBook::enter_secret(void)
+std::string    PhoneBook::enterSecret(void)
 {
     std::string secret;
     while (1 && std::cin)
     {
         std::cout << "Enter secret: ";
         std::getline(std::cin, secret);
+        if (secret.empty())
+            continue;
         if (!secret.empty())
             break;
+        std::cout << "Field cannot be empty." << std::endl;
     }
     return (secret);
 }
 
 
-void PhoneBook::add_contact()
+void PhoneBook::addContact()
 {
     std::string first;
     std::string last;
@@ -122,44 +148,24 @@ void PhoneBook::add_contact()
     std::string secret;
     std::string number;
 
-    if (this->next_index == 8)
-        this->next_index = 0;
+    if (this->nextIndex == 8)
+        this->nextIndex = 0;
 
-    first = enter_first();
-    last = enter_last();
-    nickname = enter_nick();
-    number = enter_number();
-    secret = enter_secret();
+    first = enterFirst();
+    last = enterLast();
+    nickname = enterNick();
+    number = enterNumber();
+    secret = enterSecret();
 
-    cont[next_index].set_firstname(first);
-    cont[next_index].set_lastname(last);
-    cont[next_index].set_nickname(nickname);
-    cont[next_index].set_number(number);
-    cont[next_index].set_secret(secret);
+    cont[nextIndex].setFirstName(first);
+    cont[nextIndex].setLastName(last);
+    cont[nextIndex].setNickName(nickname);
+    cont[nextIndex].setNumber(number);
+    cont[nextIndex].setSecret(secret);
 
-    this->next_index++;
-    if (this->nb_contacts < 8)
-        this->nb_contacts++;
+    this->nextIndex++;
+    if (this->nbContacts < 8)
+        this->nbContacts++;
 }
 
-int main(void)
-{
-    class PhoneBook pb;
-    int i = 0;
-    std::string cmd;
-    while (1 && std::cin)
-    {
-        std::cout << "Enter command: ";
-        std::getline(std::cin, cmd);
-        if (cmd == "EXIT")
-            break;
-        else if (cmd == "ADD")
-            pb.add_contact();
-        else if (cmd == "SEARCH")
-        {
-            pb.display_all_contacts();
-            pb.search_contacts();
-        }
-        i++;
-    }
-}
+

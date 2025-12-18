@@ -1,6 +1,5 @@
 #include <iostream>
-#include <bits/stdc++.h>
-using namespace std;
+#include <cctype>
 
 int main (int argc, char *argv[])
 {
@@ -9,14 +8,14 @@ int main (int argc, char *argv[])
     {
         while (i < argc)
         {
-            string s = argv[i];
-            transform(s.begin(), s.end(), s.begin(), ::toupper);
-            cout << s;
+            std::string s = argv[i];
+            for (size_t j = 0; j < s.length(); j++)
+                std::cout << (char)toupper(argv[i][j]);
             i++;
         }
     }
     else
-        cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    cout << endl;
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+    std::cout << std::endl;
     return 0;
 }

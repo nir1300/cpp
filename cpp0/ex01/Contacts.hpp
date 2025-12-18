@@ -1,30 +1,30 @@
 #pragma once
-#ifndef __CONTACTS_H__
-#define __CONTACTS_H__
+#ifndef __CONTACTS_HPP__
+#define __CONTACTS_HPP__
 
 #include <iostream>
-#include <bits/stdc++.h>
+#include <iomanip>
 
 bool    str_isalpha(std::string str);
 bool    str_isdigit(std::string str);
 
 class Contact {
     public:
-        void                  display_contact() const; // display selected contact in SEARCH
+        void                  displayContact() const; // display selected contact in SEARCH
 
         // getters
-        const std::string&    get_firstname(void) const;
-        const std::string&    get_lastname(void) const;
-        const std::string&    get_nickname(void) const;
+        const std::string&    getFirstName(void) const;
+        const std::string&    getLastName(void) const;
+        const std::string&    getNickName(void) const;
 
         // setters 
-        void    set_firstname(std::string);
-        void    set_lastname(std::string);
-        void    set_nickname(std::string);
-        void    set_number(std::string);
-        void    set_secret(std::string);
+        void    setFirstName(std::string);
+        void    setLastName(std::string);
+        void    setNickName(std::string);
+        void    setNumber(std::string);
+        void    setSecret(std::string);
 
-        void    format_and_print(const std::string &field) const;
+        void    formatAndPrint(const std::string &field) const;
 
     private:
         std::string first;

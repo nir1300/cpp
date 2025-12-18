@@ -2,7 +2,6 @@
 #include <iostream>
 
 int main( void ) {
-
     // test main
     std::cout << "0. Test main from subject" << std::endl;
 
@@ -55,9 +54,21 @@ int main( void ) {
     std::cout << "c * d = " << g << std::endl;
     std::cout << "c / d = " << h << std::endl;
 
+    // in-/decrement operators
+
+    std::cout << "\n\n3. In-/decrement operators" << std::endl;
+
+    std::cout << "c = " << c << std::endl;
+
+    std::cout << "[++c] pre-increment: " << ++c << ", post-increment:" << c << std::endl;
+    std::cout << "[c++] pre-increment: " << c++ << ", post-increment:" << c << std::endl;
+
+    std::cout << "[--c] pre-decrement: " << --c << ", post-decrement:" << c << std::endl;
+    std::cout << "[c--] pre-decrement: " << c-- << ", post-decrement:" << c << std::endl;
+    
     // min/max -> 2 functions for min/max each, both do the same, but one has *const* params, other doesnt
 
-    std::cout << "\n\n3. Min/max functions" << std::endl;
+    std::cout << "\n\n4. Min/max functions" << std::endl;
 
     std::cout << "c = " << c << std::endl;
     std::cout << "d = " << d << std::endl;

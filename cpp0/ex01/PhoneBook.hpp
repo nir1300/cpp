@@ -1,27 +1,29 @@
 #pragma once
-#ifndef __PHONEBOOK_H__
-#define __PHONEBOOK_H__
+#ifndef __PHONEBOOK_HPP__
+#define __PHONEBOOK_HPP__
 
 #include "Contacts.hpp"
+#include <iostream>
+#include <bits/stdc++.h>
 
 class PhoneBook {
     public:
         PhoneBook(void); // constructor
 
-        void            add_contact(void);
-        void            display_all_contacts(void) const ; 
-        void            search_contacts(void) const ;
+        void            addContact(void);
+        void            displayAllContacts(void) const ; 
+        void            searchContacts(void) const ;
 
-        std::string     enter_first(void);
-        std::string     enter_last(void);
-        std::string     enter_nick(void);
-        std::string     enter_number(void);
-        std::string     enter_secret(void);
+        std::string     enterFirst(void);
+        std::string     enterLast(void);
+        std::string     enterNick(void);
+        std::string     enterNumber(void);
+        std::string     enterSecret(void);
     
     private:
         Contact cont[8];
-        int     next_index;
-        int     nb_contacts;
+        int     nextIndex;
+        int     nbContacts;
     };
 
 
