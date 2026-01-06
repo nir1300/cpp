@@ -1,16 +1,17 @@
 NAME = scavtrap
 CFILES = main.cpp ClapTrap.cpp ScavTrap.cpp
 OFILES = $(CFILES:.cpp=.o)
+HEADER = ClapTrap.hpp ScavTrap.hpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
+	c++ $(CFLAGS) $(OFILES) -o $(NAME) 
 
-%.o: %.cpp
-	c++ $(CFLAGS) -c $< -o $@ -g
+%.o: %.cpp $(HEADER)
+	c++ $(CFLAGS) -c $< -o $@ 
 
 clean:
 	rm -f $(OFILES)

@@ -15,6 +15,4 @@ class FragTrap: public ClapTrap {
         ~FragTrap();
 };
 
-
-
 #endif

@@ -6,5 +6,4 @@ int main(void)
     Zombie *two = newZombie("Newy");
     randomChump("Chumpy");
     delete(two);
-
 }
