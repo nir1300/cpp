@@ -10,10 +10,10 @@ class Animal {
         std::string type;
     public:
         const std::string getType() const;
-        virtual void makeSound() const;
+        virtual void makeSound() const; // virtual in base class means it is redefined in derived class => runtime polymorphism, call correct function via base class pointer/reference
         // Orthodox Canonical Form
         Animal();
-        virtual ~Animal();
+        virtual ~Animal(); // if base class has any virtual functions, destructor should be virtual too -> important for cleanup
         Animal(const Animal &other);
         Animal &operator=(const Animal& other);
 };

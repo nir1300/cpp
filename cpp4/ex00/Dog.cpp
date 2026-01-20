@@ -1,4 +1,5 @@
 #include "Dog.hpp"
+#include "Animal.hpp"
 
 void Dog::makeSound() const
 {
@@ -7,7 +8,7 @@ void Dog::makeSound() const
 
 // OCF
 
-Dog::Dog()
+Dog::Dog() : Animal()
 {
     this->type = "Dog";
     std::cout << "[Dog] default constructor called" << std::endl;
@@ -18,7 +19,7 @@ Dog::~Dog()
     std::cout << "[Dog] destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &other)
+Dog::Dog(const Dog &other) : Animal(other)
 {
     this->type = other.type;
     std::cout << "[Dog] copy constructor called" << std::endl;

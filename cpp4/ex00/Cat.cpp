@@ -7,7 +7,7 @@ void Cat::makeSound() const
 
 // OCF
 
-Cat::Cat()
+Cat::Cat() : Animal()
 {
     type = "Cat";
     std::cout << "[Cat] default constructor called" << std::endl;
@@ -18,9 +18,9 @@ Cat::~Cat()
     std::cout << "[Cat] destructor called" << std::endl;
 }
 
-Cat::Cat(const Cat &other)
+Cat::Cat(const Cat &other) : Animal(other) // add : Animal() to other constructors
 {
-    this->type = other.type;
+    // this->type = other.type;
     std::cout << "[Cat] copy constructor called" << std::endl;
 }
 

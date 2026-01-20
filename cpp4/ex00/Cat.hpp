@@ -4,11 +4,11 @@
 #define __CAT_HPP__
 
 #include <iostream>
-#include "Animal.hpp"
+#include "Animal.hpp" 
 
 class Cat: public Animal {
     public:
-        void makeSound() const;
+        void makeSound() const; // why not virtual?
         // Orthodox Canonical Form
         Cat();
         ~Cat();
