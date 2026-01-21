@@ -5,9 +5,13 @@
 
 #include <iostream>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat: public Animal {
+    private:
+        Brain* brain;
     public:
+        Brain* getBrain() const;
         void makeSound() const; // why not virtual?
         // Orthodox Canonical Form
         Cat();

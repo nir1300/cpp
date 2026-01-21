@@ -11,7 +11,7 @@ class Dog: public Animal {
     private:
         Brain* brain;
     public:
-        Brain* Dog::getBrain() const;
+        Brain* getBrain() const;
         void makeSound() const;
         // Orthodox Canonical Form
         Dog();

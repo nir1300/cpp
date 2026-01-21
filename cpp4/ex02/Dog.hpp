@@ -5,9 +5,13 @@
 
 #include <iostream>
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog: public Animal {
+    private:
+        Brain* brain;
     public:
+        Brain* getBrain() const;
         void makeSound() const;
         // Orthodox Canonical Form
         Dog();

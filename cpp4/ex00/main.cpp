@@ -4,6 +4,8 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+// wrong animals: is it correct (sound)?
+
 int main()
 {
     std::cout << "Test animals: \n" << std::endl;

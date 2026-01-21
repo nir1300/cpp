@@ -25,18 +25,19 @@ int main()
     delete i;
     delete j;
     }
-
     {
-    std::cout << "\n[Cat] Test copy constructor & copy assignment operator\n" << std::endl;
+    std::cout << "\n[Cat] Test copy constructor\n" << std::endl;
     Cat aa;
-    Cat bb(aa); // test copy constructor
+    Cat bb(aa);
     std::cout << "Brain address: " << aa.getBrain() << std::endl;
     std::cout << "Brain address: " << bb.getBrain() << std::endl; // different memory address -> deep copy
+    }
+    {
+    std::cout << "\n[Cat] Test copy assignment operator\n" << std::endl;
     Cat cc;
-    Cat dd; // test copy assignment operator
+    Cat dd;
     dd = cc;
     }
-
     {
     std::cout << "\n[Dog] Test copy constructor & copy assignment operator\n" << std::endl;
     Dog aa;
@@ -46,17 +47,5 @@ int main()
     Dog cc;
     Dog dd; // test copy assignment operator
     dd = cc;
-    }
-    {
-    std::cout << "\n\nTest wrong animals: \n" << std::endl;
-    const WrongAnimal* a = new WrongAnimal();
-    const WrongAnimal* c = new WrongCat();
-    std::cout << a->getType() << " " << std::endl;
-    std::cout << c->getType() << " " << std::endl;
-    a->makeSound(); // will output the wrong animal sound!
-    c->makeSound(); // same
-
-    delete a;
-    delete c;
     }
 }
