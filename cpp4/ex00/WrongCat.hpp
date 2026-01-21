@@ -8,6 +8,7 @@
 
 class WrongCat: public WrongAnimal {
     public:
+        void makeSound() const;
         // Orthodox Canonical Form
         WrongCat();
         ~WrongCat();

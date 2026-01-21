@@ -3,6 +3,11 @@
 
 // OCF
 
+void WrongCat::makeSound() const
+{
+    std::cout << "Wrong Meow!" << std::endl;
+}
+
 WrongCat::WrongCat() : WrongAnimal()
 {
     type = "WrongCat";

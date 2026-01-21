@@ -1,8 +1,6 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 
 // abstract class: class designed to be a base class
 // a class that defines or inherits at last one pure virtual function
