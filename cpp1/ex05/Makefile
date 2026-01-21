@@ -2,15 +2,15 @@ NAME = harl
 CFILES = main.cpp Harl.cpp
 OFILES = $(CFILES:.cpp=.o)
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
+	c++ $(CFLAGS) $(OFILES) -o $(NAME)
 
 %.o: %.cpp
-	c++ $(CFLAGS) -c $< -o $@ -g
+	c++ $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)
