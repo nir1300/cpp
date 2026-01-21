@@ -2,7 +2,7 @@ NAME = harl
 CFILES = main.cpp Harl.cpp
 OFILES = $(CFILES:.cpp=.o)
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
