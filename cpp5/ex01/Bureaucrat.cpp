@@ -1,11 +1,12 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-const char*  GradeTooHighException::what() const throw()
+const char*  Bureaucrat::GradeTooHighException::what() const throw()
 {
     return ("Grade is too high");
 }
 
-const char*  GradeTooLowException::what() const throw()
+const char*  Bureaucrat::GradeTooLowException::what() const throw()
 {
     return ("Grade is too low");
 }
@@ -73,4 +74,14 @@ void Bureaucrat::decrementGrade()
         grade++;
     else
         throw GradeTooLowException();
+}
+
+void Bureaucrat::signForm(Form form)
+{
+    form.beSigned(*this);
+    if (form.getIsSigned())
+        std::cout << name << " signed " << form.getName() << std::endl;
+    else // need to add reason!!
+        std::cout << name << " couldn't sign " << form.getName() << " because grade is too low" << std::endl;
+     
 }

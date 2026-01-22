@@ -7,17 +7,6 @@
 #include <exception>
 #include "Bureaucrat.hpp"
 
-
-// class GradeTooHighException: public std::exception {
-//     public:
-//         virtual const char* what() const throw();
-// };
-
-// class GradeTooLowException: public std::exception {
-//     public:
-//         virtual const char* what() const throw();
-// };
-
 class Form {
     private:
         const std::string name;
@@ -26,7 +15,7 @@ class Form {
         const int execGrade;
     public:
         // Orthodox Canonical Form
-        Form(const std::string name, bool isSigned, const int signGrade, const int execGrade);
+        Form(const std::string name, const int signGrade, const int execGrade);
         Form();
         ~Form(); 
         Form(const Form &other);
@@ -34,10 +23,21 @@ class Form {
 
         // member functions
         std::string getName() const;
+        bool         getIsSigned() const;
         int         getSignGrade() const;
         int         getExecGrade() const;
         void        beSigned(Bureaucrat buri);
-        void        signForm();
+
+        // nested exception classes
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
 
 };
 

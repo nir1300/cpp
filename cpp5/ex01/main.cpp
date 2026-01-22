@@ -1,9 +1,10 @@
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include <exception>
 
 // https://cplusplus.com/doc/tutorial/exceptions/
 
-void rangeTests(std::string name, int grade)
+void bureaucratRangeTests(std::string name, int grade)
 {
     try {
         Bureaucrat test(name, grade);
@@ -30,35 +31,39 @@ void changeGradeTest(std::string name, int grade, int changeGrade)
     }
 }
 
+void formRangeTests(std::string name, const int signGrade, const int execGrade)
+{
+    try {
+        Form test(name, signGrade, execGrade);
+        std::cout << test;
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+}
+
+// TO DO BEFORE SUBMITTING
+// maybe check if sign grade is higher than exec grade
+
 int main(void)
 {
     std::cout << "Valid range tests:\n" << std::endl;
-    rangeTests("a", 1);
-    rangeTests("b", 75);
-    rangeTests("c", 150);
+    formRangeTests("a", 2, 1);
+    formRangeTests("b", 150, 75);
+    formRangeTests("c", 150, 1);
 
     std::cout << "\n\nInvalid range tests:\n" << std::endl;
-    rangeTests("d", -1);
-    rangeTests("e", 0);
-    rangeTests("f", 151);
+    formRangeTests("d", 77, -1);
+    formRangeTests("e", 150, 0);
+    formRangeTests("f", 151, 1);
+    formRangeTests("f", 151, 0);
 
-    std::cout << "\n\nValid grade in-/decrement tests:\n" << std::endl;
-    changeGradeTest("g", 1, 1);
-    changeGradeTest("h", 150, -1);
-
-    std::cout << "\n\nInvalid grade in-/decrement tests:\n" << std::endl;
-    changeGradeTest("i", 1, -1);
-    changeGradeTest("j", 150, 1); 
-
+    std::cout << "\n\nTest form signing:\n" << std::endl;
     // try {
-    //     Bureaucrat a("a", 3);
-    //     std::cout << a;
-    //     Bureaucrat b("b", 160);
-    //     std::cout << b;
-    //     Bureaucrat c("c", -1);
-    //     std::cout << c;
-    //     Bureaucrat d("d", 10);
-    //     std::cout << d;
+        Bureaucrat a("a", 150);
+        std::cout << a;
+        Form aa("Form a", 149, 1);
+        a.signForm(aa);
     // }
     // catch (std::exception &e)
     // {
