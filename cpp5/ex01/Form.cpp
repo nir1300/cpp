@@ -17,6 +17,7 @@ const char*  Form::GradeTooLowException::what() const throw()
 
 Form::Form(const std::string name, const int signGrade, const int execGrade) : name(name), isSigned(false), signGrade(signGrade), execGrade(execGrade)
 {
+    std::cout << "[Form] constructor called." << std::endl;
     if (signGrade < 1 || execGrade < 1)
         throw GradeTooHighException();
     if (signGrade > 150 || execGrade > 150)
@@ -26,7 +27,7 @@ Form::Form(const std::string name, const int signGrade, const int execGrade) : n
 
 Form::Form() : name("Default"), isSigned(false), signGrade(100), execGrade(10)
 {
-    std::cout << "[Form] default constructor called." << std::endl;
+    std::cout << "[Form] default constructor called (default values added)." << std::endl;
 }
 
 Form::~Form()
@@ -72,6 +73,7 @@ void        Form::beSigned(Bureaucrat buri)
 {
     if (buri.getGrade() > getSignGrade())
         throw GradeTooLowException();
+    isSigned = true;
 }
 
 

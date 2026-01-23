@@ -47,6 +47,7 @@ void formRangeTests(std::string name, const int signGrade, const int execGrade)
 
 int main(void)
 {
+    {
     std::cout << "Valid range tests:\n" << std::endl;
     formRangeTests("a", 2, 1);
     formRangeTests("b", 150, 75);
@@ -57,16 +58,29 @@ int main(void)
     formRangeTests("e", 150, 0);
     formRangeTests("f", 151, 1);
     formRangeTests("f", 151, 0);
-
+    }
+    {
     std::cout << "\n\nTest form signing:\n" << std::endl;
-    // try {
-        Bureaucrat a("a", 150);
+    Bureaucrat a("a", 150);
+    Form aa("Form a", 149, 1);
+    try {
         std::cout << a;
-        Form aa("Form a", 149, 1);
         a.signForm(aa);
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+    try {
+        a.incrementGrade();
+        std::cout << "<< grade was incremented >>" << std::endl;
+        std::cout << a;
+        aa.getSignGrade();
+        a.signForm(aa);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+}
 }
