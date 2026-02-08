@@ -6,7 +6,7 @@
 #include <iostream>
 #include <exception>
 
-class Form;
+class AForm;
 
 class Bureaucrat {
     private:
@@ -25,7 +25,8 @@ class Bureaucrat {
         int getGrade() const;
         void    incrementGrade();
         void    decrementGrade();
-        void     signForm(Form& form);
+        void     signForm(AForm& form);
+        void executeForm(AForm const & form);
 
         // nested exception classes
         class GradeTooHighException: public std::exception {

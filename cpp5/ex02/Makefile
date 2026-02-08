@@ -1,7 +1,7 @@
 NAME = bureaucrat
-CFILES = main.cpp Bureaucrat.cpp Form.cpp
+CFILES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OFILES = $(CFILES:.cpp=.o)
-HEADER = Bureaucrat.hpp Form.hpp
+HEADER = Bureaucrat.hpp Form.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
