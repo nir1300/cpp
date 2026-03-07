@@ -7,6 +7,8 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <ctime>
+
 
 class Span {
     private:
@@ -24,6 +26,10 @@ class Span {
         void addNumber(int n);
         void addNumbers(int n);
         class NoSpanFoundException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+        class ClassFullException: public std::exception {
             public:
                 virtual const char* what() const throw();
         };
