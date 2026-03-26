@@ -27,6 +27,7 @@ void errorHandling(int argc, char **argv)
 
 void printBefore(int argc, char **argv)
 {
+    std::cout << "Before: ";
     for (int i = 1; i < argc; i++)
     {
         std::cout << argv[i];
@@ -42,33 +43,26 @@ void printBefore(int argc, char **argv)
 //     std::cout << "Time to process a range of " << n << "elements with std::deque: " << time << " us" << std::endl;
 // }
 
-template <typename Container>
-void putInContainer(Container& c, int argc, char **argv)
+PmergeMe::PmergeMe(std::vector<int> vec, std::deque<int> deq) : vec(vec), deq(deq) 
 {
-    for (int i = 1; i < argc; i++)
-    {
-        std::string str = argv[i];
-        for (size_t j = 0; j < str.length(); j++)
-        {
-            int res = 0;
-            while (str[j] == ' ')
-                continue;
-            while (str[j] && isdigit(str[j]))
-            {
-                res = (res * 10) + (str[j] - '0');
-                j++;
-            }
-            c.push_back(res);
-        }
-    }
+    size = vec.size();
 }
 
-template <typename Container>
-void printContainerContents(Container& c, std::string str)
+PmergeMe::~PmergeMe() {}
+
+PmergeMe::PmergeMe(const PmergeMe &other)
 {
-    std::cout << str;
-    typename Container::iterator it = c.begin();
-    while (it != c.end())
-        std::cout << *it++ << " ";
-    std::cout << std::endl;
+    this->vec = other.vec;
+    this->deq = other.deq;
+    this->size = other.size;
+}
+
+PmergeMe &PmergeMe::operator=(const PmergeMe& other)
+{
+    if (this == &other)
+        return *this;
+    this->vec = other.vec;
+    this->deq = other.deq;
+    this->size = other.size;
+    return *this;
 }

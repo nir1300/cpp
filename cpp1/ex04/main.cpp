@@ -23,7 +23,6 @@ int main(int argc, char **argv)
         return 1;
     }
     std::string line;
-    
     while (std::getline(inputFile, line))
     {
         size_t pos = 0;
