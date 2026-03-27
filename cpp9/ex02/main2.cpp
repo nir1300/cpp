@@ -90,37 +90,52 @@ std::vector<int> PmergeMe::generateJacob()
     for (size_t i = 1; i < size; i++)
     {
         size_t tmp = jacob[i] + (2*jacob[i-1]);
-        if (tmp <= size && tmp != 1)
+        // std::cout << "tmp: " << tmp << std::endl;
+        if (tmp <= size)
             jacob.push_back(tmp);
-        else
+        else if (tmp > size)
             break;
     }
     std::vector<int> gaps;
-    for (size_t i = 0; i < jacob.size(); i++)
+    gaps.push_back(jacob[0]);
+    for (size_t i = 1; i < jacob.size(); i++)
     {
-        int tmp = jacob[i];
-        gaps.push_back(jacob[i]);
-        size_t j = 0;
-        while (j+i+1 < size && jacob[i+j+1] != tmp+1)
+        for (size_t j = 0; j < gaps.size(); j++)
         {
-            gaps.push_back(jacob[i]+j);
-            j++;
+            // if (gaps.size() == size/3)
+            //     break;
+            if (gaps[j] == jacob[i] || gaps.size() >= size/2)
+                break;
+            else if (j == gaps.size() - 1 && gaps[j] != jacob[i])
+            {
+                gaps.push_back(jacob[i]);
+                if (jacob[i] != jacob[i-1]-1)
+                {
+                    int tmp = jacob[i]-1;
+                    while (tmp != jacob[i-1])
+                    {
+                        gaps.push_back(tmp--);
+                    }
+                }
+            }
         }
     }
+    std::cout << "gaps size:" << gaps.size() << ", size: " << size << std::endl;
     printJacob(gaps);
     return gaps;
+
 }
 
 void PmergeMe::sortPairs(std::vector<std::pair<int, int> >& pairs, size_t order)
 {
-
+    // std::cout << "size: " << size << std::endl;
     if (order > size/2)
     {
-        std::cout << "ORDER: " << order << std::endl;
+        // std::cout << "ORDER: " << order << std::endl;
         printPairs(pairs);
         generateJacob();
-        // if (size != order) // if size == order -> sorted
-        //     insertPairs(pairs,order/2);
+        // if (size != order) // if size == order -> sorted ??? NOT TRUE
+        // insertPairs(pairs,order/2);
         return;
     }
     for (size_t i = 0; i + order - 1 < size/2; i += order)

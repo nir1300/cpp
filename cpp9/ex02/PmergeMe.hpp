@@ -33,6 +33,9 @@ class PmergeMe {
         void sortPairs(std::vector<std::pair<int, int> >& pairs, size_t order);
         // void insertPairs(std::vector<std::pair<int, int> >& pairs, int order);
         std::vector<int> generateJacob();
+        void printJacob(std::vector<int> jacob);
+        template <typename Container> void binaryInsertionJacob(Container& main, Container& pend, Container& partners);
+        template <typename Container> void isSorted(Container& main);
         // nested exception classes
         // class GradeTooHighException: public std::exception {
         //     public:
