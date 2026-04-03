@@ -8,7 +8,9 @@
 #include <deque>
 #include <vector>
 #include <utility>
-
+#include <algorithm>
+#include <ctime>
+#include <iomanip>
 
 // template <class T>
 
@@ -19,6 +21,7 @@ class PmergeMe {
     private:
         // template <typename Container> Container c;
         size_t size;
+        int comparisons;
         std::vector<int> vec;
         std::deque<int> deq;
     public:
@@ -30,22 +33,11 @@ class PmergeMe {
 
         template <typename Container> void mergeInsertion(Container& c);
         void sort(void);
-        void sortPairs(std::vector<std::pair<int, int> >& pairs, size_t order);
-        // void insertPairs(std::vector<std::pair<int, int> >& pairs, int order);
         std::vector<int> generateJacob();
         void printJacob(std::vector<int> jacob);
         template <typename Container> void binaryInsertionJacob(Container& main, Container& pend, Container& partners);
-        template <typename Container> void isSorted(Container& main);
-        // nested exception classes
-        // class GradeTooHighException: public std::exception {
-        //     public:
-        //         virtual const char* what() const throw();
-        // };
-
-        // class GradeTooLowException: public std::exception {
-        //     public:
-        //         virtual const char* what() const throw();
-        // };
+        template <typename Container> void binaryInsertionExtra(Container& main, int extra);
+        template <typename Container> bool isSorted(Container& main);
 };
 
 template <typename Container>
@@ -57,7 +49,9 @@ void putInContainer(Container& c, int argc, char **argv)
         for (size_t j = 0; j < str.length(); j++)
         {
             int res = 0;
-            while (str[j] == ' ')
+            while (str[j] && str[j] == ' ')
+                j++;
+            if (!str[j] || !isdigit(str[j]))
                 continue;
             while (str[j] && isdigit(str[j]))
             {

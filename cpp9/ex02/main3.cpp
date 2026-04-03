@@ -1,8 +1,4 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
-
-// input -> container -> algorithm -> sorted container
-// insert via iterator: insert(iterator, value);
 
 // STEPS IN ALGORITHM
 // 1. create pairs
@@ -10,19 +6,6 @@
 // 3. build main chain: take larger elements and recursively sort them
 // 4. build pending chain
 // 5. insert first pending element at front, insert the rest using jacobsthal order, find position with binary search
-
-
-// template <typename Container>
-// void printPairs(Container& c)
-// {
-//     typename Container::iterator it = c.begin();
-//     while (it != c.end())
-//     {
-//         std::cout << "[" << it.first << ", " << it.second << "], ";
-//         it++;
-//     }
-//     std::cout << std::endl;
-// }
 
 void printPairs(std::vector<std::pair<int, int> > pairs)
 {
@@ -37,75 +20,6 @@ bool sortSecond(const std::pair<int, int>& left, const std::pair<int,int>& right
     return left.second < right.second;
 }
 
-
-// void PmergeMe::insertPairs(std::vector<std::pair<int, int> >& pairs, int order)
-// {
-//     if (order == 2) // && size % 2 != 0)
-//     {
-//         printPairs(pairs);
-//         return;
-//     }
-//     for (int i = 0; i + order - 1 < size/2; i += order)
-//     {
-//         int left = i+order/2-1;
-//         int right = i+order-1;
-//         if (right > size/2 - 1)
-//             break;
-//         if (pairs[left].second > pairs[right].second)
-//         {
-//             for (int j = 0; j < order/2; j++)
-//             {
-//                 if (i+j+order/2 > size/2-1)
-//                     break;
-//                 std::swap(pairs[i + j], pairs[i + j + order/2]);
-//             }
-//         }
-//     }
-//     // std::cout << "ORDER: " << order << std::endl;
-//     // printPairs(pairs);
-//     sortPairs(pairs, order * 2);
-// }
-
-
-
-
-
-void PmergeMe::sortPairs(std::vector<std::pair<int, int> >& pairs, size_t order)
-{
-    // std::cout << "size: " << size << std::endl;
-    if (order > size/2)
-    {
-        // std::cout << "ORDER: " << order << std::endl;
-        printPairs(pairs);
-        generateJacob();
-        // if (size != order) // if size == order -> sorted ??? NOT TRUE
-        // insertPairs(pairs,order/2);
-        return;
-    }
-    for (size_t i = 0; i + order - 1 < size/2; i += order)
-    {
-        size_t left = i+order/2-1;
-        size_t right = i+order-1;
-        if (right > size/2 - 1)
-            break;
-        if (pairs[left].second > pairs[right].second)
-        {
-            for (size_t j = 0; j < order/2; j++)
-            {
-                if (i+j+order/2 > size/2-1)
-                    break;
-                std::swap(pairs[i + j], pairs[i + j + order/2]);
-            }
-        }
-    }
-    // std::cout << "ORDER: " << order << std::endl;
-    // printPairs(pairs);
-    sortPairs(pairs, order * 2);
-    // std::cout << " final ORDER: " << order << std::endl;
-    // insert extras
-    // std::vector::insert(iterator position, value)
-    // printPairs(pairs);
-}
 
 void merge(std::vector<std::pair<int, int> >& arr, std::vector<std::pair<int, int> >& leftArr, std::vector<std::pair<int, int> >& rightArr)
 {
@@ -147,7 +61,6 @@ void mergeSort(std::vector<std::pair<int, int> >& pairs)
     // printPairs(leftArr);
     // std::cout << "right: ";
     // printPairs(rightArr);
-    // // condition when to return ??
     if (leftArr.size() > 1)
         mergeSort(leftArr);
     if (rightArr.size() > 1)
@@ -159,9 +72,6 @@ template <typename Container>
 void PmergeMe::binaryInsertionJacob(Container& main, Container& pend, Container& partners)
 {
     std::vector<int> jacob = generateJacob();
-    // printContainerContents(partners, "final partners: ");
-    // printContainerContents(main, "final Main: ");
-    // printContainerContents(pend, "final pend: ");
     main.insert(main.begin(), pend[0]);
     for (size_t i = 1; i < jacob.size(); i++)
     {
@@ -192,19 +102,39 @@ void PmergeMe::binaryInsertionJacob(Container& main, Container& pend, Container&
     }
 }
 
+template <typename Container>
+void PmergeMe::binaryInsertionExtra(Container& main, int extra)
+{
+        int lo = 0;
+        int hi = main.size();
+        while (lo < hi)
+        {
+            int mid = lo + (hi - lo) / 2;
+            if (extra > main[mid])
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        main.insert(main.begin()+lo, extra);
+}
+
 template <typename Container> 
-void PmergeMe::isSorted(Container& main)
+bool PmergeMe::isSorted(Container& main)
 {
     for (size_t i = 0; i+1 < main.size(); i++)
     {
         if (main[i] > main[i+1])
         {
-            std::cout << "WRONG" << std::endl;
-            return;
+            // std::cout << "ERROR - Sorted incorrectly!" << std::endl;
+            return false;
         }
     }
-    std::cout << "Sorted correctly!" << std::endl;
-    std::cout << "main size: " << main.size() << ", actual size: " << size << std::endl;
+    if (main.size() != size)
+    {
+        // std::cout << "ERROR - Sorted incorrectly!" << std::endl;
+        return false;
+    }
+    return true;
 }
 
 template <typename Container>
@@ -220,8 +150,14 @@ void PmergeMe::mergeInsertion(Container& c)
         else
             pairs.push_back(std::make_pair(b, a));
     }
+    bool odd = false;
+    int extraNum;
+    if (c.size() % 2)
+    {
+        odd = true;
+        extraNum = c[c.size() - 1];
+    }
     mergeSort(pairs);
-    printPairs(pairs);
     // create main and pend chain
     Container main;
     Container pend;
@@ -231,42 +167,52 @@ void PmergeMe::mergeInsertion(Container& c)
         main.push_back(pairs[i].second);
     }
     Container partners = main;
-    // if (extra)
-    //     pend.push_back(extraInt);
-    // printContainerContents(main, "Main: ");
-    // printContainerContents(pend, "pend: ");
-    // std::cout << "main size: " << main.size() << std::endl;
     binaryInsertionJacob(main, pend, partners);
+    if (odd)
+        binaryInsertionExtra(main, extraNum);
     c = main;
-    // printContainerContents(main, "FINAL MAIN: ");
-    // isSorted(main);
 }
 
 void PmergeMe::sort(void)
 {
-    // start clock
+    // TIME WRONG -> needs data management part as well
+    std::vector<int> before = vec;
+
+    if (size == 1 || isSorted(vec))
+    {
+        std::cout << "Already sorted" << std::endl;
+        return;
+    }
+    clock_t start = clock();
     mergeInsertion(deq);
-    // std::cout << "Time to process a range of " << size << "elements with std::deque: " << time << " us" << std::endl;
+    clock_t end = clock();
+    double elapsedDeq = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-    // start clock
+    start = clock();
     mergeInsertion(vec);
-    // std::cout << "Time to process a range of " << size << "elements with std::vector: " << time << " us" << std::endl;
+    end = clock();
+    double elapsedVec = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-    printContainerContents(deq, "After: ");
-    isSorted(deq);
+    printContainerContents(before, "Before: ");
+    printContainerContents(deq, "After:  ");
+
+    // std::cout << std::fixed << std::setprecision(5);
+    std::cout << "Time to process a range of " << size << " elements with std::deque:  " << elapsedDeq << " us" << std::endl;
+    std::cout << "Time to process a range of " << size << " elements with std::vector: " << elapsedVec << " us" << std::endl;
+
+    if (!isSorted(deq) || !isSorted(vec))
+        std::cout << "ERROR - Sorted incorrectly!" << std::endl;
+    else
+        std::cout << "SUCCESS - Sorted correctly!" << std::endl;
 }
 
 int main(int argc, char **argv)
 {
     errorHandling(argc, argv);
-    printBefore(argc, argv);
-
     std::vector<int> vec;
     std::deque<int> deq;
     putInContainer(vec, argc, argv);
     putInContainer(deq, argc, argv);
     PmergeMe cont(vec, deq);
     cont.sort();
-
-
 }

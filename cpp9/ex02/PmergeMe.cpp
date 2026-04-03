@@ -9,7 +9,7 @@ void errorHandling(int argc, char **argv)
     if (argc == 1)
     {
         std::cerr << "Error: missing arguments" << std::endl;
-        exit(1);
+        exit(1);// return 1;
     }
     for (int i = 1; i < argc; i++)
     {
@@ -19,10 +19,11 @@ void errorHandling(int argc, char **argv)
             if (arg[j] != ' ' && !std::isdigit(arg[j]))
             {
                 std::cerr << "Error" << std::endl;
-                exit(1);
+                exit(1);// return 1;
             }
         }
     }
+    // return 0;
 }
 
 void printBefore(int argc, char **argv)
@@ -42,9 +43,22 @@ void printTime()
 
 }
 
+// void	PmergeMe::printTime( void )
+// {
+//     clock_t start = clock();
+//     char buffer[80];
+//     std::time_t raw;
+//     std::time(&raw);
+//     std::tm* local = std::localtime(&raw);
+//     std::strftime(buffer, 80, "%Y%m%d_%H%M%S", local);
+//     std::cout << "[" << buffer << "] ";
+// }
+
+
 PmergeMe::PmergeMe(std::vector<int> vec, std::deque<int> deq) : vec(vec), deq(deq) 
 {
     size = vec.size();
+    comparisons = 0;
 }
 
 PmergeMe::~PmergeMe() {}

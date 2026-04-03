@@ -6,6 +6,7 @@
 #include <limits>
 #include <climits>
 
+
 void ScalarConverter::toChar(std::string str)
 {
     char c = str[0];
@@ -31,6 +32,7 @@ bool ScalarConverter::isInt(std::string str)
 
 void ScalarConverter::toInt(std::string str, long num)
 {
+    // check: only digits, optional + -
     if (num < INT_MIN || num > INT_MAX)
         std::cout << "char: impossible\nint: overflow or underflow\nfloat: impossible\ndouble: impossible" << std::endl;
     else
@@ -51,6 +53,7 @@ void ScalarConverter::toInt(std::string str, long num)
 
 bool ScalarConverter::isFloat(std::string str)
 {
+    // check: digits, one dot, f at end
     if (str == "-inff" || str == "+inff" || str == "inff" || str == "nanf")
         return true;
     bool dot = false;
@@ -76,42 +79,44 @@ bool ScalarConverter::isPseudoLiteral(std::string str)
     return (str == "-inf" || str == "+inf" || str == "inf" || str == "nan" || str == "-inff" || str == "+inff" || str == "inff" || str == "nanf");
 }
 
-void ScalarConverter::toFloat(std::string str, long num)
+void ScalarConverter::toFloat(std::string str, float num)
 {
+    // didnt use min() -> returns smallest positive number
     if (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max())
         std::cout << "char: impossible\nint: impossible\nfloat: overflow or underflow\ndouble: impossible" << std::endl;
     else
     {
-    int digitAfterDecimal = -1;
-    bool dotSeen = false;
-    for (size_t i = 0; i < str.length() - 1; i++)
-    {
-        if (str[i] == '.')
-            dotSeen = true;
-        if (dotSeen)
+        int digitAfterDecimal = -1;
+        bool dotSeen = false;
+        for (size_t i = 0; i < str.length() - 1; i++)
+        {
+            if (str[i] == '.')
+                dotSeen = true;
+            if (dotSeen)
+                digitAfterDecimal++;
+        }
+        if (digitAfterDecimal == 0)
             digitAfterDecimal++;
-    }
-    if (digitAfterDecimal == 0)
-        digitAfterDecimal++;
-    float c = std::atof(str.c_str());
-    if (isPseudoLiteral(str))
-        std::cout << "char: impossible" << std::endl;
-    else if (std::isprint(c))
-        std::cout << "char: '" << static_cast<char>(c) << "'" << std::endl;
-    else
-        std::cout << "char: Non displayable" << std::endl;
-    if (num < INT_MIN || num > INT_MAX || isPseudoLiteral(str))
-        std::cout << "int: impossible" << std::endl; 
-    else
-        std::cout << "int: " << static_cast<int>(c) << std::endl; 
-    std::cout << std::fixed << std::setprecision(digitAfterDecimal); // for fixed/poinnt notation and decimal precision
-    std::cout << "float: " << c << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(c) << std::endl;
+        float c = std::atof(str.c_str()); // converts to float
+        if (isPseudoLiteral(str) || c < 0 || c > 127) // isprint might segfault for extremely large num -> 0/127 check before 
+            std::cout << "char: impossible" << std::endl;
+        else if (std::isprint(c))
+            std::cout << "char: '" << static_cast<char>(c) << "'" << std::endl;
+        else
+            std::cout << "char: Non displayable" << std::endl;
+        if (num < INT_MIN || num > INT_MAX || isPseudoLiteral(str))
+            std::cout << "int: impossible" << std::endl; 
+        else
+            std::cout << "int: " << static_cast<int>(c) << std::endl; 
+        std::cout << std::fixed << std::setprecision(digitAfterDecimal); // for fixed/poinnt notation and decimal precision
+        std::cout << "float: " << c << "f" << std::endl;
+        std::cout << "double: " << static_cast<double>(c) << std::endl;
     }
 }
 
 bool ScalarConverter::isDouble(std::string str)
 {
+    // check: digits, one dot
     if (str == "-inf" || str == "+inf" || str == "inf" || str == "nan")
         return true;
     bool dot = false;
@@ -130,7 +135,7 @@ bool ScalarConverter::isDouble(std::string str)
     return true;
 }
 
-void ScalarConverter::toDouble(std::string str, long num)
+void ScalarConverter::toDouble(std::string str, double num)
 {
     if (num < -std::numeric_limits<double>::max() || num > std::numeric_limits<double>::max())
         std::cout << "char: impossible\nint: impossible\nfloat: impossible\ndouble: overflow or underflow" << std::endl;
@@ -148,9 +153,9 @@ void ScalarConverter::toDouble(std::string str, long num)
         if (digitAfterDecimal == 0)
             digitAfterDecimal++;
         double c = std::atof(str.c_str());
-        if (isPseudoLiteral(str))
+        if (isPseudoLiteral(str) || c < 0 || c > 127) // isprint might segfault for extremely large num -> 0/127 check before 
             std::cout << "char: impossible" << std::endl;
-        else if (std::isprint(c))
+        else if (std::isprint(static_cast<int>(c)))
             std::cout << "char: '" << static_cast<char>(c) << "'" << std::endl;
         else
             std::cout << "char: Non displayable" << std::endl;
@@ -169,11 +174,11 @@ void ScalarConverter::convert(std::string const & str)
     if (str.length() == 1 && !isdigit(str[0]) && isprint(str[0]))
         return(toChar(str));
     else if (isInt(str))
-        return(toInt(str, strtol(str.c_str(), NULL, 10)));
+        return(toInt(str, strtol(str.c_str(), NULL, 10))); // pass strol (long) to do overflow checks etc
     else if (isFloat(str))
-        return(toFloat(str, strtol(str.c_str(), NULL, 10)));
+        return(toFloat(str, strtof(str.c_str(), NULL)));
     else if (isDouble(str))
-        return(toDouble(str, strtol(str.c_str(), NULL, 10)));
+        return(toDouble(str, strtod(str.c_str(), NULL)));
     else
         std::cout << "Represents no known type: No conversion possible" << std::endl;
 }

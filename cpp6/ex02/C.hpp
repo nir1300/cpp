@@ -8,4 +8,5 @@
 
 class C: public Base {};
 
+class D: public Base {};
 #endif
