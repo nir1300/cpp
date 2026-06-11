@@ -3,6 +3,13 @@
 int main( void ) {
     Array<int> test;
     try {
+        const Array<int> a(10);
+        a[0]; // ERROR in your current version
+    }
+    catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
+    try {
         char letter = 'a';
         Array<char> a(3);
         for (int i = 0; i < 3; i++)

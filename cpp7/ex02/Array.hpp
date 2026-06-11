@@ -4,6 +4,7 @@
 #define __ARRAY_HPP__
 
 #include <iostream>
+#include <exception>
 
 template <class T>
 class Array {
@@ -17,6 +18,7 @@ class Array {
         ~Array();
         Array &operator=(const Array &other);
         T &operator[](unsigned int i);
+        const T &operator[](unsigned int i) const;
         unsigned int size() const;
 
         class OutOfBoundsException: public std::exception {

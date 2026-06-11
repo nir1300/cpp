@@ -43,11 +43,20 @@ const char *Array<T>::OutOfBoundsException::what() const throw()
 }
 
 template <class T>
-T &Array<T>::operator[](unsigned int i){
+const T &Array<T>::operator[](unsigned int i) const{
     if (i >= _size)
         throw OutOfBoundsException();
     return array[i];
 }
+
+
+template <class T>
+T &Array<T>::operator[](unsigned int i) {
+    if (i >= _size)
+        throw OutOfBoundsException();
+    return array[i];
+}
+
 
 template <class T>
 unsigned int Array<T>::size() const {

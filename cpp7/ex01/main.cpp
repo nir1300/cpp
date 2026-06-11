@@ -11,9 +11,18 @@
 // }
 
 int main( void ) {
-    int a[2] = {1, 2};
-    iter(a, 2, printArray<int>);
-
+    {
+    const int a[] = {1, 2};
+    const int c = 2;
+    iter(a, c, printArray<int>);
+    }
+    {
+    int a[] = {1, 2};
+    const int c = 2;
+    iter(a, c, printArray<int>);
+    }
+    {
     char b[3] = {'h', 'i'};
     iter(b, 2, printArray<char>);
+    }
 }
