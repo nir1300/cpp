@@ -3,12 +3,17 @@
 int main( void ) {
     Array<int> test;
     try {
-        const Array<int> a(10);
-        a[0]; // ERROR in your current version
+        Array<unsigned int> b(10);
+        for (int i = 0; i < 10; i++)
+            b[i] = i;   
+        for (int j = 0; j < 10; j++)
+            std::cout << b[j];     
+        std::cout << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
+
     try {
         char letter = 'a';
         Array<char> a(3);
@@ -54,7 +59,7 @@ int main( void ) {
             b[i] = i;  
         Array<int> c(b); 
         c[9] = 0;  
-        std::cout << "                 Original array: ";   
+        std::cout << "Original array: ";   
         for (int j = 0; j < 10; j++)
             std::cout << b[j];
         std::cout << "\nModified copy constructed array: ";   
@@ -71,7 +76,7 @@ int main( void ) {
             b[i] = i;  
         Array<int> c = b; 
         c[9] = 0;  
-        std::cout << "                         Original array: ";   
+        std::cout << "Original array: ";   
         for (int j = 0; j < 10; j++)
             std::cout << b[j];
         std::cout << "\nModified copy assignenet operator array: ";   
@@ -84,8 +89,7 @@ int main( void ) {
     }
     try {
         Array<int> empty;
-        std::cout << "Empty size: " << empty.size() << std::endl;
-        empty[0]; // should throw
+        empty[0]; // throws exceptionn
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;

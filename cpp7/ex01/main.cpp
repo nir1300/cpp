@@ -17,7 +17,7 @@ int main( void ) {
     iter(a, c, printArray<int>);
     }
     {
-    int a[] = {1, 2};
+    int a[] = {3,44};
     const int c = 2;
     iter(a, c, printArray<int>);
     }
