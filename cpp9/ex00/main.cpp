@@ -60,19 +60,24 @@ bool validValue(float value)
     return true;
 }
 
-void find_exchange_rate(char **argv, std::map<std::string, float>& data)
+int find_exchange_rate(char **argv, std::map<std::string, float>& data)
 {
     std::ifstream inputFile(argv[1]);
     if (!inputFile)
     {
         std::cerr << "Error: could not open file." << std::endl;
-        exit(1);
+        return(1);
     }
     std::string line;
     std::string date;
     float value;
     // std::cout << std::fixed << std::setprecision(4);
     std::getline(inputFile, line); // skip first line
+    if (line != "date | value")
+    {
+        std::cerr << "Error: first line must be 'date | value'" << std::endl;
+        return(1);
+    }
     // std::cout << std::fixed << std::setprecision(4);
     while (std::getline(inputFile, line, '\n'))
     {
@@ -99,6 +104,7 @@ void find_exchange_rate(char **argv, std::map<std::string, float>& data)
             std::cout << date << " => " << value << " = " << value * it->second << std::endl;
         }
     }
+    return 0;
 }
 
 int main(int argc, char **argv)
