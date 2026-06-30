@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef __PMERGEME_HPP__
-#define __PMERGEME_HPP__
-
 #include <iostream>
 #include <stdlib.h>
 #include <deque>
@@ -12,10 +9,8 @@
 #include <ctime>
 #include <iomanip>
 
-// template <class T>
 
 void errorHandling(int argc, char **argv);
-void printBefore(int argc, char **argv);
 
 class PmergeMe {
     private:
@@ -89,8 +84,6 @@ void mergePairs(PairContainer& arr, PairContainer& leftArr, PairContainer& right
             arr[a] = rightArr[r];
             r++;
         }
-        //
-
         else if ((r < rightArr.size() && l < leftArr.size() && leftArr[l].second < rightArr[r].second) || (l < leftArr.size() && r >= rightArr.size()))
         {
             arr[a] = leftArr[l];
@@ -284,5 +277,3 @@ void    printJacob(Container jacob)
         std::cout << jacob[i] << " ";
     std::cout << std::endl;
 }
-
-#endif

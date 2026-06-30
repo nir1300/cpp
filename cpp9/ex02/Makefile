@@ -2,7 +2,7 @@ NAME = PmergeMe
 CFILES = main.cpp PmergeMe.cpp
 OFILES = $(CFILES:.cpp=.o)
 HEADER = PmergeMe.hpp
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 

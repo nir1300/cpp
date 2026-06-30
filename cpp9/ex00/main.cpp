@@ -1,9 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <string>
-#include <iomanip>
-#include <time.h>
-
-
 
 int main(int argc, char **argv)
 {
