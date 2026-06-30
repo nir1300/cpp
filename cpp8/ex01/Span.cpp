@@ -19,27 +19,29 @@ Span &Span::operator=(const Span& other)
     return *this;
 }
 
-int Span::shortestSpan(void)
+int Span::shortestSpan(void) const
 {
     int shortest_span = -1;
     if (_vec.size() <= 1)
         throw NoSpanFoundException();
-    sort(_vec.begin(), _vec.end());
-    for (long unsigned int i = 1; i < _vec.size(); i++)
+    std::vector<int> tmp = _vec;
+    std::sort(tmp.begin(), tmp.end());
+    for (long unsigned int i = 1; i < tmp.size(); i++)
     {
-        if (_vec[i] - _vec[i - 1] < shortest_span || shortest_span < 0)
-            shortest_span = _vec[i] - _vec[i - 1];
+        if (tmp[i] - tmp[i - 1] < shortest_span || shortest_span < 0)
+            shortest_span = tmp[i] - tmp[i - 1];
     }
     return shortest_span;
 }
 
-int Span::longestSpan(void)
+int Span::longestSpan(void) const
 {
     if (_vec.size() <= 1)
         throw NoSpanFoundException();
-    sort(_vec.begin(), _vec.end());
-    int vMin = *_vec.begin();
-    int vMax = _vec.back();
+    std::vector<int> tmp = _vec;
+    std::sort(tmp.begin(), tmp.end());
+    int vMin = *tmp.begin();
+    int vMax = tmp.back();
     return (vMax - vMin);
 }
 
@@ -56,7 +58,7 @@ void Span::addNumbers(int n)
     std::srand(std::time(NULL));
     for (int i = 0; i < n; i++)
     {
-        int randoNum = std::rand() % RAND_MAX;
+        int randoNum = std::rand();
         addNumber(randoNum);
     }
 }

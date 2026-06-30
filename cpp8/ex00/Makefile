@@ -1,7 +1,7 @@
 NAME = easyfind
 CFILES = main.cpp
 OFILES = $(CFILES:.cpp=.o)
-HEADER = easyfind.hpp
+HEADER = easyfind.hpp easyfind.tpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)

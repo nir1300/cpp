@@ -1,13 +1,12 @@
-#pragma once
-
-#ifndef __SPAN_HPP__
-#define __SPAN_HPP__
+#ifndef SPAN_HPP
+#define SPAN_HPP
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <iterator>
 #include <ctime>
+#include <exception>
 
 
 class Span {
@@ -21,8 +20,8 @@ class Span {
         Span(const Span &other);
         Span &operator=(const Span& other);
 
-        int shortestSpan(void);
-        int longestSpan(void);
+        int shortestSpan(void) const;
+        int longestSpan(void) const;
         void addNumber(int n);
         void addNumbers(int n);
         class NoSpanFoundException: public std::exception {
