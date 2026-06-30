@@ -1,16 +1,16 @@
 NAME = mutated
-CFILES = main.cpp MutantStack.cpp
+CFILES = main.cpp
 OFILES = $(CFILES:.cpp=.o)
-HEADER = MutantStack.hpp
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+HEADER = MutantStack.hpp MutantStack.tpp
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
+	c++ $(CFLAGS) $(OFILES) -o $(NAME)
 
 %.o: %.cpp $(HEADER)
-	c++ $(CFLAGS) -c $< -o $@ -g
+	c++ $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)

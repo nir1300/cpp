@@ -2,15 +2,15 @@ NAME = span
 CFILES = main.cpp Span.cpp
 OFILES = $(CFILES:.cpp=.o)
 HEADER = Span.hpp
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
+	c++ $(CFLAGS) $(OFILES) -o $(NAME)
 
 %.o: %.cpp $(HEADER)
-	c++ $(CFLAGS) -c $< -o $@ -g
+	c++ $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OFILES)

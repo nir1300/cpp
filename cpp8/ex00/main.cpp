@@ -1,8 +1,5 @@
 #include "easyfind.hpp"
 
-// to do: tests, find index of printed int (has to be first occurence)
-// change to print in main, return res
-// test with dif containers not just vector
 int main(void)
 {
     {
@@ -63,6 +60,12 @@ int main(void)
         }
         try {
             std::cout << *easyfind(cont, 'n') << std::endl;
+        }
+        catch (std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+        try {
+            std::cout << *easyfind(cont, 'I') << std::endl;
         }
         catch (std::exception &e) {
             std::cout << e.what() << std::endl;
