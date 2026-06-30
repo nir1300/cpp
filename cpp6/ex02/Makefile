@@ -1,7 +1,7 @@
 NAME = serializer
 CFILES = main.cpp Base.cpp
 OFILES = $(CFILES:.cpp=.o)
-HEADER = Serializer.hpp
+HEADER = Base.hpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)

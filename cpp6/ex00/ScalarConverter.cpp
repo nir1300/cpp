@@ -30,7 +30,7 @@ bool ScalarConverter::isInt(std::string str)
 }
 
 
-void ScalarConverter::toInt(std::string str, long num)
+void ScalarConverter::toInt(std::string str, long num) 
 {
     // check: only digits, optional + -
     if (num < INT_MIN || num > INT_MAX)
@@ -79,7 +79,8 @@ bool ScalarConverter::isPseudoLiteral(std::string str)
     return (str == "-inf" || str == "+inf" || str == "inf" || str == "nan" || str == "-inff" || str == "+inff" || str == "inff" || str == "nanf");
 }
 
-void ScalarConverter::toFloat(std::string str, float num)
+// doesnt print overflow for int? just impossible
+void ScalarConverter::toFloat(std::string str, double num)
 {
     // didnt use min() -> returns smallest positive number
     if (num < -std::numeric_limits<float>::max() || num > std::numeric_limits<float>::max())
@@ -105,7 +106,7 @@ void ScalarConverter::toFloat(std::string str, float num)
         else
             std::cout << "char: Non displayable" << std::endl;
         if (num < INT_MIN || num > INT_MAX || isPseudoLiteral(str))
-            std::cout << "int: impossible" << std::endl; 
+            std::cout << "!!int: impossible" << std::endl; 
         else
             std::cout << "int: " << static_cast<int>(c) << std::endl; 
         std::cout << std::fixed << std::setprecision(digitAfterDecimal); // for fixed/poinnt notation and decimal precision

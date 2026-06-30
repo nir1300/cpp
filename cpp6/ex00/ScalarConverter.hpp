@@ -22,7 +22,7 @@ class ScalarConverter {
         static bool isInt(std::string str);
         static void toInt(std::string str, long num);
         static bool isFloat(std::string str);
-        static void toFloat(std::string str, float num);
+        static void toFloat(std::string str, double num);
         static bool isDouble(std::string str);
         static void toDouble(std::string str, double num);
         // member function

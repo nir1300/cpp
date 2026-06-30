@@ -3,12 +3,12 @@
 Serializer::Serializer() {}
 
 Serializer::Serializer(const Serializer &other) {
-    (void)other;
+    *this = other;
 }
 
 Serializer &Serializer::operator=(const Serializer &other) {
-    *this = other;
-    return *this;
+    (void)other;
+    return (*this);
 }
 
 Serializer::~Serializer() {}

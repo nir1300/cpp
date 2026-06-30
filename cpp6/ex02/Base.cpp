@@ -2,6 +2,7 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <exception>
 
 Base::~Base() {}
 
@@ -46,17 +47,17 @@ void identify(Base& p){
         std::cout << "[Reference input] A" << std::endl;
 
     }
-    catch (std::bad_cast& e) {}
+    catch (std::exception& e) {}
     try {
         B &bTest = dynamic_cast<B&>(p);
         std::cout << "[Reference input] B" << std::endl;
         (void)bTest;
     }
-    catch (std::bad_cast& e) {}
+    catch (std::exception& e) {}
     try {
         C &cTest = dynamic_cast<C&>(p);
         std::cout << "[Reference input] C" << std::endl;
         (void)cTest;
     }
-    catch (std::bad_cast& e) {}
+    catch (std::exception& e) {}
 }
