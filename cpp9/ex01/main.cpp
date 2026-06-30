@@ -1,26 +1,8 @@
 #include "RPN.hpp"
 
-bool isOperator(char c)
-{
-    return (c == '/' || c == '*' || c == '+' || c== '-');
-}
 
-void doOperation(char c, std::stack<int>& st)
-{
-    int tmp = st.top();
-    st.pop();
-    if (c == '+')
-        st.top() += tmp;
-    else if (c == '-')
-        st.top() -= tmp;
-    else if (c == '*')
-        st.top() *= tmp;
-    else if (c == '/')
-        st.top() /= tmp;
-}
 
-// FIX
-// valgrind ./RPN "9 8 * 1 + 2 - 3 + *"
+
 int main(int argc, char **argv)
 {
     // error handling
@@ -55,7 +37,11 @@ int main(int argc, char **argv)
                 std::cerr << "Error" << std::endl;
                 return 1;
             }
-            doOperation(arg[i], st);
+            if (doOperation(arg[i], st))
+            {
+                std::cerr << "Error (zero division error)" << std::endl;
+                return 1;
+            }
         }
     }
     // print solution

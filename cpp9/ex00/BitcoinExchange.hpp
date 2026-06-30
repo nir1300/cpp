@@ -9,4 +9,9 @@
 #include <map>
 #include <fstream>
 
+void create_map(std::map<std::string, float>& data);
+bool validDate(std::string date);
+bool validValue(float value);
+int find_exchange_rate(char **argv, std::map<std::string, float>& data);
+
 #endif

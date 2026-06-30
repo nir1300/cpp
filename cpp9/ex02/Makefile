@@ -1,5 +1,5 @@
 NAME = PmergeMe
-CFILES = main3.cpp PmergeMe.cpp
+CFILES = main.cpp PmergeMe.cpp
 OFILES = $(CFILES:.cpp=.o)
 HEADER = PmergeMe.hpp
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g

@@ -7,4 +7,7 @@
 #include <stack>
 #include <cstdlib>
 
+bool isOperator(char c);
+int doOperation(char c, std::stack<int>& st);
+
 #endif
