@@ -72,9 +72,20 @@ void printContainerContents(Container& c, std::string str)
     std::cout << std::endl;
 }
 
+
+template <typename PairContainer>
+void printPairs(PairContainer& pairs)
+{
+    std::cout << "Pairs: ";
+    for (size_t i = 0; i < pairs.size(); i++)
+        std::cout << "[" << pairs[i].first << "," << pairs[i].second << "]";
+    std::cout << std::endl;
+}
+
 template <typename PairContainer>
 void mergePairs(PairContainer& arr, PairContainer& leftArr, PairContainer& rightArr)
 {
+    // // 3. Merging: Merge back left and right arrays and compare the first pairs second value of each array
     size_t r = 0;
     size_t l = 0;
     for (size_t a = 0; a < arr.size(); a++)
@@ -92,13 +103,14 @@ void mergePairs(PairContainer& arr, PairContainer& leftArr, PairContainer& right
         else
             return;
     }
-    // std::cout << "merge: ";
-    // printPairs(arr);
+    std::cout << "merge: ";
+    printPairs(arr);
 }
 
 template <typename PairContainer>
-void mergeSort(PairContainer& pairs)
+void splitting(PairContainer& pairs)
 {
+    // // 2. Splitting: Split the chain down the middle recursively until only 1 pair remains
     PairContainer leftArr, rightArr;
     for (size_t i = 0; i < pairs.size()/2; i++)
         leftArr.push_back(pairs[i]);
@@ -109,14 +121,16 @@ void mergeSort(PairContainer& pairs)
         rightArr.push_back(pairs[i]);
         j++;
     }
-    // std::cout << "left: ";
-    // printPairs(leftArr);
-    // std::cout << "right: ";
-    // printPairs(rightArr);
+
+    std::cout << "left: ";
+    printPairs(leftArr);
+    std::cout << "right: ";
+    printPairs(rightArr);
+
     if (leftArr.size() > 1)
-        mergeSort(leftArr);
+        splitting(leftArr);
     if (rightArr.size() > 1)
-        mergeSort(rightArr);
+        splitting(rightArr);
     mergePairs(pairs, leftArr, rightArr);
 }
 
@@ -145,6 +159,8 @@ void PmergeMe::binaryInsertionJacob(Container& main, Container& pend, Container&
         while (lo < hi)
         {
             int mid = lo + (hi - lo) / 2;
+            if (elementToInsert == 4)
+                std::cout << "mid: " << mid << ", hi: " << hi << ", middle: " << main[mid] << std::endl;
             if (elementToInsert > main[mid])
                 lo = mid + 1;
             else
@@ -192,6 +208,7 @@ bool PmergeMe::isSorted(Container& main)
 template <typename Container, typename PairContainer>
 void PmergeMe::mergeInsertion(Container& c, PairContainer& pairs)
 {
+    // // 1. Pairing: pairing and sorting of individual pairs (smaller num first, bigger second)
     for (size_t i = 0; i + 1 < c.size(); i+=2)
     {
         int a = c[i];
@@ -209,7 +226,7 @@ void PmergeMe::mergeInsertion(Container& c, PairContainer& pairs)
         odd = true;
         extraNum = c[c.size() - 1];
     }
-    mergeSort(pairs);
+    splitting(pairs);
     // create main and pend chain
     Container main;
     Container pend;
