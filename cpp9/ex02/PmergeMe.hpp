@@ -16,7 +16,6 @@ class PmergeMe {
     private:
         // template <typename Container> Container c;
         size_t size;
-        int comparisons;
         int argcStored;
         char **argvStored;
         std::vector<int> vec;
@@ -31,7 +30,7 @@ class PmergeMe {
         template <typename Container, typename PairContainer> void mergeInsertion(Container& c, PairContainer& pairs);
         void sort();
  
-        void printJacob(std::vector<int> jacob);
+        template <typename Container> void printJacob(Container& jacob);
         template <typename Container> Container generateJacob(void);
         template <typename Container> void binaryInsertionJacob(Container& main, Container& pend, Container& partners);
         template <typename Container> void binaryInsertionExtra(Container& main, int extra);
@@ -85,26 +84,37 @@ void printPairs(PairContainer& pairs)
 template <typename PairContainer>
 void mergePairs(PairContainer& arr, PairContainer& leftArr, PairContainer& rightArr)
 {
-    // // 3. Merging: Merge back left and right arrays and compare the first pairs second value of each array
+    size_t l = 0; 
     size_t r = 0;
-    size_t l = 0;
-    for (size_t a = 0; a < arr.size(); a++)
+    size_t a = 0; // index for target arr
+
+    while (l < leftArr.size() && r < rightArr.size())
     {
-        if ((r < rightArr.size() && l < leftArr.size() && leftArr[l].second > rightArr[r].second) || (l >= leftArr.size() && r < rightArr.size()))
-        {
-            arr[a] = rightArr[r];
-            r++;
-        }
-        else if ((r < rightArr.size() && l < leftArr.size() && leftArr[l].second < rightArr[r].second) || (l < leftArr.size() && r >= rightArr.size()))
+        if (leftArr[l].second <= rightArr[r].second)
         {
             arr[a] = leftArr[l];
             l++;
         }
         else
-            return;
+        {
+            arr[a] = rightArr[r];
+            r++;
+        }
+        a++;
     }
-    std::cout << "merge: ";
-    printPairs(arr);
+    // if there are remaining elements, copy them over
+    while (l < leftArr.size())
+    {
+        arr[a] = leftArr[l];
+        l++;
+        a++;
+    }
+    while (r < rightArr.size())
+    {
+        arr[a] = rightArr[r];
+        r++;
+        a++;
+    }
 }
 
 template <typename PairContainer>
@@ -122,10 +132,10 @@ void splitting(PairContainer& pairs)
         j++;
     }
 
-    std::cout << "left: ";
-    printPairs(leftArr);
-    std::cout << "right: ";
-    printPairs(rightArr);
+    // std::cout << "left: ";
+    // printPairs(leftArr);
+    // std::cout << "right: ";
+    // printPairs(rightArr);
 
     if (leftArr.size() > 1)
         splitting(leftArr);
@@ -159,8 +169,6 @@ void PmergeMe::binaryInsertionJacob(Container& main, Container& pend, Container&
         while (lo < hi)
         {
             int mid = lo + (hi - lo) / 2;
-            if (elementToInsert == 4)
-                std::cout << "mid: " << mid << ", hi: " << hi << ", middle: " << main[mid] << std::endl;
             if (elementToInsert > main[mid])
                 lo = mid + 1;
             else
@@ -192,16 +200,10 @@ bool PmergeMe::isSorted(Container& main)
     for (size_t i = 0; i+1 < main.size(); i++)
     {
         if (main[i] > main[i+1])
-        {
-            // std::cout << "ERROR - Sorted incorrectly!" << std::endl;
             return false;
-        }
     }
     if (main.size() != size)
-    {
-        // std::cout << "ERROR - Sorted incorrectly!" << std::endl;
         return false;
-    }
     return true;
 }
 
@@ -217,7 +219,6 @@ void PmergeMe::mergeInsertion(Container& c, PairContainer& pairs)
             pairs.push_back(std::make_pair(a, b));
         else
             pairs.push_back(std::make_pair(b, a));
-        comparisons++;
     }
     bool odd = false;
     int extraNum;
@@ -251,7 +252,6 @@ Container PmergeMe::generateJacob(void)
     for (size_t i = 1; i < size; i++)
     {
         size_t tmp = jacob[i] + (2*jacob[i-1]);
-        // std::cout << "tmp: " << tmp << std::endl;
         if (tmp <= size)
             jacob.push_back(tmp);
         else if (tmp > size)
@@ -263,8 +263,6 @@ Container PmergeMe::generateJacob(void)
     {
         for (size_t j = 0; j < gaps.size(); j++)
         {
-            // if (gaps.size() == size/3)
-            //     break;
             if (gaps[j] == jacob[i] || gaps.size() >= size/2)
                 break;
             else if (j == gaps.size() - 1 && gaps[j] != jacob[i])
@@ -287,7 +285,7 @@ Container PmergeMe::generateJacob(void)
 }
 
 template <typename Container>
-void    printJacob(Container jacob)
+void    PmergeMe::printJacob(Container& jacob)
 {
     std::cout << "JACOB: ";
     for (size_t i = 0; i < jacob.size(); i++)

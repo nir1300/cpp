@@ -29,7 +29,6 @@ void errorHandling(int argc, char **argv)
 PmergeMe::PmergeMe(int argc, char **argv) : argcStored(argc), argvStored(argv) 
 {
     size = argc - 1;
-    comparisons = 0;
 }
 
 PmergeMe::~PmergeMe() {}
