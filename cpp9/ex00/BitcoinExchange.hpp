@@ -11,10 +11,11 @@
 #include <string>
 #include <iomanip>
 #include <time.h>
+#include <cctype>
 
 void create_map(std::map<std::string, float>& data);
 bool validDate(std::string date);
-bool validValue(float value);
+bool validValue(std::string valstr);
 int find_exchange_rate(char **argv, std::map<std::string, float>& data);
 
 #endif

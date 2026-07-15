@@ -9,21 +9,25 @@ void errorHandling(int argc, char **argv)
     if (argc == 1)
     {
         std::cerr << "Error: missing arguments" << std::endl;
-        exit(1);// return 1;
+        exit(1);
+    }
+    if (argc == 2)
+    {
+        std::cerr << "Error: not enough numbers" << std::endl;
+        exit(1);
     }
     for (int i = 1; i < argc; i++)
     {
-        std::string arg = argv[i]; // leak for invalid inputs??
+        std::string arg = argv[i];
         for (size_t j = 0; j < arg.size(); j++)
         {
             if (arg[j] != ' ' && !std::isdigit(arg[j]))
             {
                 std::cerr << "Error" << std::endl;
-                exit(1);// return 1;
+                exit(1);
             }
         }
     }
-    // return 0;
 }
 
 PmergeMe::PmergeMe(int argc, char **argv) : argcStored(argc), argvStored(argv) 
@@ -38,6 +42,8 @@ PmergeMe::PmergeMe(const PmergeMe &other)
     this->vec = other.vec;
     this->deq = other.deq;
     this->size = other.size;
+    this->argcStored = other.argcStored;
+    this->argvStored = other.argvStored; 
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe& other)
@@ -47,6 +53,8 @@ PmergeMe &PmergeMe::operator=(const PmergeMe& other)
     this->vec = other.vec;
     this->deq = other.deq;
     this->size = other.size;
+    this->argcStored = other.argcStored;
+    this->argvStored = other.argvStored; 
     return *this;
 }
 
@@ -86,12 +94,11 @@ void PmergeMe::sort()
     printContainerContents(before, "Before: ");
     printContainerContents(vec, "After:  ");
 
-    // std::cout << std::fixed << std::setprecision(5);
     std::cout << "Time to process a range of " << size << " elements with std::deque:  " << elapsedDeq << " us" << std::endl;
     std::cout << "Time to process a range of " << size << " elements with std::vector: " << elapsedVec << " us" << std::endl;
 
-    if (!isSorted(deq) || !isSorted(vec))
-        std::cout << "ERROR - Sorted incorrectly!" << std::endl;
-    else
-        std::cout << "SUCCESS - Sorted correctly!" << std::endl;
+    // if (!isSorted(deq) || !isSorted(vec))
+    //     std::cout << "ERROR - Sorted incorrectly!" << std::endl;
+    // else
+    //     std::cout << "SUCCESS - Sorted correctly!" << std::endl;
 }

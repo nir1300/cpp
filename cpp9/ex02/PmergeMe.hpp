@@ -8,9 +8,11 @@
 #include <algorithm>
 #include <ctime>
 #include <iomanip>
+#include <cmath>
 
 
 void errorHandling(int argc, char **argv);
+int F(int n);
 
 class PmergeMe {
     private:
@@ -210,7 +212,7 @@ bool PmergeMe::isSorted(Container& main)
 template <typename Container, typename PairContainer>
 void PmergeMe::mergeInsertion(Container& c, PairContainer& pairs)
 {
-    // // 1. Pairing: pairing and sorting of individual pairs (smaller num first, bigger second)
+    // 1. Pairing: pairing and sorting of individual pairs (smaller num first, bigger second)
     for (size_t i = 0; i + 1 < c.size(); i+=2)
     {
         int a = c[i];
