@@ -7,11 +7,11 @@
 #include "Weapon.hpp"
 
 class HumanB {
-    private:
+    private: 
         std::string name;
-        Weapon*      weapon;
+        Weapon*      weapon; // must be pointer, weapon can be null -> not set during creation
     public:
-        const std::string   getName(void);
+        const std::string&   getName(void);
         void                attack(void);
         void    setWeapon(Weapon& inputWeapon);
         HumanB(std::string inputName);

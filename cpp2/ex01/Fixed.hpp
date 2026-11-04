@@ -6,9 +6,6 @@
 #include <iostream>
 #include <cmath>
 
-class Fixed; 
-
-std::ostream &operator<<(std::ostream& out, const Fixed& num);
     
 class Fixed {
     private:
@@ -26,5 +23,7 @@ class Fixed {
         float toFloat(void) const;
         int toInt(void) const;
 };
+
+std::ostream &operator<<(std::ostream& out, const Fixed& num);
 
 #endif

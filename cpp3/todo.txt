@@ -1,8 +1,0 @@
-6/1:
-eval Cpp2
-doublecheck cpp3 & 4
-
-7/1: 
-eval cpp3 & 4
-
-

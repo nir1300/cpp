@@ -43,25 +43,25 @@ int main(void)
     rangeTests("f", 151);
 
     std::cout << "\n\nValid grade in-/decrement tests:\n" << std::endl;
-    changeGradeTest("g", 1, 1);
-    changeGradeTest("h", 150, -1);
+    changeGradeTest("g", 1, 1); // decrement grade (+1)
+    changeGradeTest("h", 150, -1); // increment grade (-1)
 
     std::cout << "\n\nInvalid grade in-/decrement tests:\n" << std::endl;
     changeGradeTest("i", 1, -1);
     changeGradeTest("j", 150, 1); 
 
-    // try {
-    //     Bureaucrat a("a", 3);
-    //     std::cout << a;
-    //     Bureaucrat b("b", 160);
-    //     std::cout << b;
-    //     Bureaucrat c("c", -1);
-    //     std::cout << c;
-    //     Bureaucrat d("d", 10);
-    //     std::cout << d;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+    try {
+        Bureaucrat a("a", 3);
+        std::cout << a;
+        Bureaucrat b("b", 160);
+        std::cout << b;
+        Bureaucrat c("c", -1);
+        std::cout << c;
+        Bureaucrat d("d", 10);
+        std::cout << d;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }

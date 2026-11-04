@@ -30,5 +30,5 @@ FragTrap &FragTrap::operator=(const FragTrap& other) // cannot call list initial
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "[ScavTrap] HIGH FIVE!!" << std::endl;
+    std::cout << "[ScavTrap] Positive HIGH FIVE request!!" << std::endl;
 }

@@ -1,4 +1,4 @@
-NAME = bureaucrat
+NAME = form
 CFILES = main.cpp Bureaucrat.cpp Form.cpp
 OFILES = $(CFILES:.cpp=.o)
 HEADER = Bureaucrat.hpp Form.hpp

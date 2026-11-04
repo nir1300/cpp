@@ -84,4 +84,17 @@ int main(void)
             std::cout << e.what() << std::endl;
         }
     }
+    try 
+    {
+        std::cout << "MAIN TEST" << std::endl;
+        Intern someRandomIntern;
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
+        rrf->execution();
+        delete rrf;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }

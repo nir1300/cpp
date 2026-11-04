@@ -9,10 +9,10 @@
 class HumanA {
     private:
         std::string name;
-        Weapon&      weapon; // needs to be reference, otherwise value will not be updated after resetting the weapon in main
+        Weapon&      weapon; // should be reference, otherwise value will not be updated after resetting the weapon in main
     public:
         HumanA(std::string inputName, Weapon& inputWeapon);
-        const std::string   getName(void);
+        const std::string&   getName(void);
         void                attack(void);
 };
 

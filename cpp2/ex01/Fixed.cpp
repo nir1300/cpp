@@ -6,16 +6,19 @@ Fixed::Fixed(void)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int num)
+Fixed::Fixed(const int num) // converts int to fixed point value
 {
     this->fpn = num << this->fractBits;
-    std::cout << "Int Default constructor called" << std::endl;
+    std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float num)
+Fixed::Fixed(const float num) // converts float to fixed point value
 {
+    // leftshift = multiply by powers of 2
+    // 1 << 8 == 2^8
+    // use roundf -> otherwise might be one off (float to int always rounds down ), e.g.. 537.6 would become 537 -> should be 538 
     this->fpn = roundf(num * (1 << this->fractBits));
-    std::cout << "Float Default constructor called" << std::endl;
+    std::cout << "Float constructor called" << std::endl;
 }
 
 Fixed::~Fixed(void)
@@ -61,5 +64,7 @@ float Fixed::toFloat(void) const
 
 int Fixed::toInt(void) const
 {
+    // rightshift = divide by powers of 2
+    // similiar to above function (both divide by powers of 2) but fpn >> 8 truncates
     return (this->fpn >> this->fractBits);
 }

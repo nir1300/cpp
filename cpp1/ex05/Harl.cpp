@@ -23,6 +23,8 @@ void Harl::error( void )
 void Harl::complain( std::string level )
 {
     std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    // actions is an array containing addresses member functions -> need "this" to be called
+    // pointer to Harl member function, returns void, takes no args
     void (Harl::*actions[4])() = {&Harl::debug, &Harl::info,  &Harl::warning, &Harl::error};
     for (int i = 0; i < 4; i++)
     {

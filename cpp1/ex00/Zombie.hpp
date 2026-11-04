@@ -11,13 +11,13 @@ class Zombie {
     public:
         // constructor and deconstructor
         Zombie(std::string str);
-        ~Zombie(void);
+        ~Zombie(void); 
         // member functions
        void         announce(void); 
 };
 
 
-Zombie*      newZombie(std::string name);
-void         randomChump(std::string name);
+Zombie*      newZombie( std::string name );
+void         randomChump( std::string name );
 
 #endif

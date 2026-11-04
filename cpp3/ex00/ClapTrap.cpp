@@ -20,6 +20,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
 
 }
+
 void ClapTrap::beRepaired(unsigned int amount)
 {
     if (!this->energyPoints || !this->hitPoints)

@@ -42,23 +42,20 @@ void formRangeTests(std::string name, const int signGrade, const int execGrade)
     }
 }
 
-// TO DO BEFORE SUBMITTING
-// maybe check if sign grade is higher than exec grade
-
 int main(void)
 {
-    {
-    std::cout << "Valid range tests:\n" << std::endl;
-    formRangeTests("a", 2, 1);
-    formRangeTests("b", 150, 75);
-    formRangeTests("c", 150, 1);
+    // {
+    // std::cout << "Valid range tests:\n" << std::endl;
+    // formRangeTests("a", 2, 1);
+    // formRangeTests("b", 150, 75);
+    // formRangeTests("c", 150, 1);
 
-    std::cout << "\n\nInvalid range tests:\n" << std::endl;
-    formRangeTests("d", 77, -1);
-    formRangeTests("e", 150, 0);
-    formRangeTests("f", 151, 1);
-    formRangeTests("f", 151, 0);
-    }
+    // std::cout << "\n\nInvalid range tests:\n" << std::endl;
+    // formRangeTests("d", 77, -1);
+    // formRangeTests("e", 150, 0);
+    // formRangeTests("f", 151, 1);
+    // formRangeTests("f", 151, 0);
+    // }
     {
     std::cout << "\n\nTest form signing:\n" << std::endl;
     Bureaucrat a("a", 150);
@@ -82,5 +79,5 @@ int main(void)
     {
         std::cout << e.what() << std::endl;
     }
-}
+    }
 }

@@ -80,10 +80,11 @@ void Bureaucrat::decrementGrade()
 
 void Bureaucrat::signForm(Form& form)
 {
-    form.beSigned(*this);
-    if (form.getIsSigned())
+    // if (form.getIsSigned())
+    if (getGrade() <= form.getSignGrade())
         std::cout << name << " signed " << form.getName() << std::endl;
-    else // need to add reason!!
+    else
         std::cout << name << " couldn't sign " << form.getName() << " because grade is too low" << std::endl;
+    form.beSigned(*this);
      
 }

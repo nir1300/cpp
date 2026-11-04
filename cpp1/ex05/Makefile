@@ -1,16 +1,17 @@
 NAME = harl
 CFILES = main.cpp Harl.cpp
 OFILES = $(CFILES:.cpp=.o)
+HEADER = $(Harl.hpp)
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME)
+	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
 
-%.o: %.cpp
-	c++ $(CFLAGS) -c $< -o $@
+%.o: %.cpp $(HEADER)
+	c++ $(CFLAGS) -c $< -o $@ -g
 
 clean:
 	rm -f $(OFILES)

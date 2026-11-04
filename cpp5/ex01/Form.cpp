@@ -22,7 +22,6 @@ Form::Form(const std::string name, const int signGrade, const int execGrade) : n
         throw GradeTooHighException();
     if (signGrade > 150 || execGrade > 150)
         throw GradeTooLowException();
-    // isSigned = false;
 }
 
 Form::Form() : name("Default"), isSigned(false), signGrade(100), execGrade(10)

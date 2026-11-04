@@ -2,7 +2,7 @@
 
 HumanA::HumanA(std::string inputName, Weapon& inputWeapon) : name(inputName), weapon(inputWeapon) {} // list initialization
 
-const std::string   HumanA::getName(void)
+const std::string&   HumanA::getName(void)
 {
     return (this->name);
 }

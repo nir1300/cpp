@@ -1,17 +1,17 @@
 NAME = fixed
 CFILES = main.cpp Fixed.cpp
-# HEADERS = Fixed.hpp
 OFILES = $(CFILES:.cpp=.o)
+HEADER = Fixed.hpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	c++ $(CFLAGS) $(OFILES) -o $(NAME) -g
+	c++ $(CFLAGS) $(OFILES) -o $(NAME) 
 
-%.o: %.cpp # $(HEADERS)
-	c++ $(CFLAGS) -c $< -o $@ -g
+%.o: %.cpp $(HEADER)
+	c++ $(CFLAGS) -c $< -o $@ 
 
 clean:
 	rm -f $(OFILES)

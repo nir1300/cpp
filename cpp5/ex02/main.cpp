@@ -14,7 +14,7 @@ int main(void)
 {
     {
         std::cout << "<<< SHRUBBERY CREATION TESTS >>>" << std::endl;
-        ShrubberyCreationForm a("Home");
+        ShrubberyCreationForm a("Homee");
         Bureaucrat b("nina", 2);
         try {
             std::cout << a;

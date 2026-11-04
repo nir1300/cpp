@@ -121,8 +121,8 @@ const Fixed Fixed::operator*(const Fixed& num) const
 const Fixed Fixed::operator/(const Fixed& num) const
 {
     Fixed result;
-    result.setRawBits((this->fpn << fractBits) / num.fpn); // this->fpn/num.fpn could be zero -> need to multiply left operand by 256 to avoid always getting zero as a result 
-    return result;
+    result.setRawBits((this->fpn << fractBits) / num.fpn); // this->fpn/num.fpn could be zero -> need to multiply left operand by 256 to preserve fraction
+    return (result);
 }
 
 // min/max operators 
@@ -156,7 +156,7 @@ Fixed Fixed::max(Fixed& num1, Fixed& num2)
         res.setRawBits(num2.fpn);
     return (res);
     // if (num1.fpn > num2.fpn) // --> this would be INCORRECT
-    //     return (num1.fpn); // implicit Fixed(int) -> rescales meaning the result will will num.fpn * 256
+    //     return (num1.fpn); // implicit Fixed(int) -> rescales meaning the result will be num.fpn * 256
     // return (num2.fpn);
 }
 
@@ -173,7 +173,8 @@ const Fixed Fixed::max(const Fixed& num1, const Fixed& num2)
 Fixed Fixed::operator++() // prefix operator
 {
     ++fpn;
-    return (*this); // not necessary to create a temp Fixed here because returning *this creates a copy using copy constructor -> no rescaling issue there
+    return (*this); // increment then return updated value
+
 }
 
 const Fixed Fixed::operator++(int) //postfix operator, using dummy int to differentiate between pre- and post-increment
@@ -186,7 +187,7 @@ const Fixed Fixed::operator++(int) //postfix operator, using dummy int to differ
 Fixed Fixed::operator--() // prefix operator
 {
     --fpn;
-    return (*this); // not necessary to create a temp Fixed here because returning *this creates a copy using copy constructor -> no rescaling issue there
+    return (*this); 
 }
 
 const Fixed Fixed::operator--(int) //postfix operator, using dummy int to differentiate between pre- and post-increment

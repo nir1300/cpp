@@ -32,10 +32,10 @@ void Harl::complain( std::string level )
     }
     switch (i)
     {
-        default:
+        default: // if no cases match
             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
             break;
-        case 0:
+        case 0: // fallthrough to not get compiler issue -> execute everything from here on if match
             (this->*actions[0])();
             /* FALLTHROUGH */
         case 1:
